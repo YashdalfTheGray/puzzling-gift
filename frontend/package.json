@@ -1,0 +1,30 @@
+{
+  "name": "puzzling-gift-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "source": "src/index.html",
+  "scripts": {
+    "start": "parcel",
+    "build": "parcel build",
+    "check": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YashdalfTheGray/puzzling-gift.git"
+  },
+  "author": "Yash Kulshrestha",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/YashdalfTheGray/puzzling-gift/issues"
+  },
+  "homepage": "https://github.com/YashdalfTheGray/puzzling-gift#readme",
+  "devDependencies": {
+    "parcel": "^2.6.0",
+    "typescript": "^4.7.3"
+  },
+  "dependencies": {
+    "preact": "^10.7.3"
+  }
+}
