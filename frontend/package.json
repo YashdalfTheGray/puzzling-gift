@@ -26,5 +26,8 @@
   },
   "dependencies": {
     "preact": "^10.7.3"
+  },
+  "alias": {
+    "preact/jsx-dev-runtime": "preact/jsx-runtime"
   }
 }
