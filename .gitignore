@@ -1,7 +1,16 @@
 # File created using '.gitignore Generator' for Visual Studio Code: https://bit.ly/vscode-gig
 
-# Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,linux,macos,node,rust,vim,windows
-# Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,linux,macos,node,rust,vim,windows
+# Created by https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,vim,rust,node,macos,linux,firebase
+# Edit at https://www.toptal.com/developers/gitignore?templates=windows,visualstudiocode,vim,rust,node,macos,linux,firebase
+
+### Firebase ###
+.idea
+**/node_modules/*
+**/.firebaserc
+
+### Firebase Patch ###
+.runtimeconfig.json
+.firebase/
 
 ### Linux ###
 *~
@@ -278,7 +287,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,linux,macos,node,rust,vim,windows
+# End of https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,vim,rust,node,macos,linux,firebase
 
 # Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
-
