@@ -33,10 +33,5 @@
   },
   "alias": {
     "preact/jsx-dev-runtime": "preact/jsx-runtime"
-  },
-  "targets": {
-    "default": {
-      "distDir": "public"
-    }
   }
 }
