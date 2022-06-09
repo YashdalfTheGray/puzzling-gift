@@ -1,0 +1,21 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #aaa;
+  font-size: 12px;
+  margin: 4px;
+
+  a {
+    color: #aaa;
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+      color: #5266e7;
+
+      &:visited {
+        color: #6b4a9d;
+      }
+    }
+  }
+}
