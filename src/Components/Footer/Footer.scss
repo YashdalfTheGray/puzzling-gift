@@ -1,13 +1,15 @@
+$footer-text-color: #999;
+
 .footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #aaa;
+  color: $footer-text-color;
   font-size: 12px;
   margin: 4px;
 
   a {
-    color: #aaa;
+    color: $footer-text-color;
     transition: color 0.2s ease-in-out;
 
     &:hover {
