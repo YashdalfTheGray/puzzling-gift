@@ -1,6 +1,9 @@
 // Import the functions you need from the SDKs you need
 import { FirebaseApp, getApp, initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
+import { getDatabase, ref, child, get } from 'firebase/database';
+
+import { NoPuzzlesFoundForUserError } from '~/src/errors';
 
 const {
   FIREBASE_API_KEY,
@@ -30,4 +33,20 @@ export function initFirebaseApp() {
 
 export function getAppAnalyticsInstance(app?: FirebaseApp) {
   return getAnalytics(app || getApp());
+}
+
+export async function getPuzzlesForUser(userId: string) {
+  try {
+    const app = getApp();
+    const dbRef = ref(getDatabase(app));
+    const snapshot = await get(child(dbRef, `users/${userId}`));
+
+    if (snapshot.exists()) {
+      return snapshot.val();
+    } else {
+      throw new NoPuzzlesFoundForUserError(userId);
+    }
+  } catch (e) {
+    console.error(e);
+  }
 }
