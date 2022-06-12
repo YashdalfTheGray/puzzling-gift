@@ -28,6 +28,7 @@ export function initFirebaseApp() {
     };
 
     const app = initializeApp(firebaseConfig);
+    return app;
   }
 }
 
