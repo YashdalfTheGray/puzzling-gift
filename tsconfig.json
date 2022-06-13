@@ -15,6 +15,7 @@
     "noImplicitThis": true,
     "alwaysStrict": true,
     "removeComments": false,
+    "skipLibCheck": true,
     "noLib": false,
     "preserveConstEnums": true,
     "suppressImplicitAnyIndexErrors": true,
@@ -22,6 +23,8 @@
     "baseUrl": ".",
     "paths": {
       "preact/jsx-dev-runtime": ["node_modules/preact/jsx-runtime/"],
+      "react": ["./node_modules/preact/compat/"],
+      "react-dom": ["./node_modules/preact/compat/"],
       "/*": ["*"],
       "~/*": ["*"]
     },
