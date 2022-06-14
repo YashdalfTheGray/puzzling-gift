@@ -7,13 +7,22 @@ import Menu from '@mui/material/Menu';
 
 import { doAuthRedirect } from '~/src/auth';
 
+export type AccountButtonProps = {
+  isAuthenticated: boolean;
+  profilePictureUrl: string;
+};
+
 export type AccountButtonState = {
   menuAnchorElement: HTMLElement | null;
 };
 
-export default class AccountButton extends Component<{}, AccountButtonState> {
-  constructor() {
-    super();
+export default class AccountButton extends Component<
+  AccountButtonProps,
+  AccountButtonState
+> {
+  constructor(props: AccountButtonProps) {
+    super(props);
+
     this.state = {
       menuAnchorElement: null,
     };
@@ -55,8 +64,7 @@ export default class AccountButton extends Component<{}, AccountButtonState> {
           }}
           open={Boolean(menuAnchorElement)}
           onClose={this.handleMenuClose}>
-          <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-          <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
+          <MenuItem onClick={this.handleMenuClose}>Logout</MenuItem>
         </Menu>
       </div>
     );

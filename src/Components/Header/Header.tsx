@@ -5,29 +5,21 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
 import AccountButton from '~/src/Components/AccountButton';
+import { UserCredential } from 'firebase/auth';
 
-export type HeaderState = {
-  menuAnchorElement: HTMLElement | null;
+export type HeaderProps = {
+  authResult: UserCredential | null | undefined;
 };
 
-export default class Header extends Component<{}, HeaderState> {
-  constructor() {
-    super();
-    this.state = {
-      menuAnchorElement: null,
-    };
+export default class Header extends Component<HeaderProps, {}> {
+  constructor(props: HeaderProps) {
+    super(props);
   }
 
-  public handleMenuOpen = (event: MouseEvent) => {
-    this.setState({ menuAnchorElement: event.currentTarget as HTMLElement });
-  };
-
-  public handleMenuClose = (event: MouseEvent) => {
-    this.setState({ menuAnchorElement: null });
-  };
-
   render() {
-    const { menuAnchorElement } = this.state;
+    const { authResult } = this.props;
+
+    const profilePictureUrl = authResult?.user?.photoURL;
 
     return (
       <AppBar position="static" enableColorOnDark={true} color="primary">
@@ -35,7 +27,10 @@ export default class Header extends Component<{}, HeaderState> {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Puzzle Tracker
           </Typography>
-          <AccountButton />
+          <AccountButton
+            isAuthenticated={authResult !== null}
+            profilePictureUrl={profilePictureUrl || ''}
+          />
         </Toolbar>
       </AppBar>
     );
