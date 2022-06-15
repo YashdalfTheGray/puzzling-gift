@@ -27,3 +27,8 @@ export async function getAuthResult() {
     console.error(error);
   }
 }
+
+export async function doSignOut() {
+  const auth = getAuth();
+  await auth.signOut();
+}
