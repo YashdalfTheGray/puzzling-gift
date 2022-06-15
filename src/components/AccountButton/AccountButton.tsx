@@ -1,15 +1,17 @@
 import { Component } from 'preact';
 
+import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
-import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 
 import { doAuthRedirect } from '~/src/auth';
 
 export type AccountButtonProps = {
   isAuthenticated: boolean;
   profilePictureUrl: string;
+  userName: string;
 };
 
 export type AccountButtonState = {
@@ -32,14 +34,15 @@ export default class AccountButton extends Component<
     this.setState({ menuAnchorElement: event.currentTarget as HTMLElement });
   };
 
-  public handleMenuClose = (event: MouseEvent) => {
+  public handleMenuClose = () => {
     this.setState({ menuAnchorElement: null });
   };
 
   render() {
     const { menuAnchorElement } = this.state;
+    const { isAuthenticated, profilePictureUrl, userName } = this.props;
 
-    return (
+    return isAuthenticated ? (
       <div>
         <IconButton
           size="large"
@@ -48,7 +51,7 @@ export default class AccountButton extends Component<
           aria-haspopup="true"
           onClick={this.handleMenuOpen}
           color="inherit">
-          <AccountCircle />
+          <Avatar alt={userName} src={profilePictureUrl} />
         </IconButton>
         <Menu
           id="menu-appbar"
@@ -67,6 +70,16 @@ export default class AccountButton extends Component<
           <MenuItem onClick={this.handleMenuClose}>Logout</MenuItem>
         </Menu>
       </div>
+    ) : (
+      <IconButton
+        size="large"
+        aria-label="account of current user"
+        aria-controls="menu-appbar"
+        aria-haspopup="true"
+        onClick={doAuthRedirect}
+        color="inherit">
+        <AccountCircle />
+      </IconButton>
     );
   }
 }
