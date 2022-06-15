@@ -1,7 +1,7 @@
 import { render, FunctionalComponent } from 'preact';
 
 import { initFirebaseApp } from '~/src/firebase';
-import App from '~/src/Components/App';
+import App from '~/src/components/App';
 
 initFirebaseApp();
 

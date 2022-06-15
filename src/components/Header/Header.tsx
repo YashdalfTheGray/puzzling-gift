@@ -1,11 +1,12 @@
 import { Component } from 'preact';
 
+import { UserCredential } from 'firebase/auth';
+
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
-import AccountButton from '~/src/Components/AccountButton';
-import { UserCredential } from 'firebase/auth';
+import AccountButton from '~/src/components/AccountButton';
 
 export type HeaderProps = {
   authResult: UserCredential | null | undefined;
@@ -20,6 +21,7 @@ export default class Header extends Component<HeaderProps, {}> {
     const { authResult } = this.props;
 
     const profilePictureUrl = authResult?.user?.photoURL;
+    const userName = authResult?.user?.displayName;
 
     return (
       <AppBar position="static" enableColorOnDark={true} color="primary">
@@ -30,6 +32,7 @@ export default class Header extends Component<HeaderProps, {}> {
           <AccountButton
             isAuthenticated={authResult !== null}
             profilePictureUrl={profilePictureUrl || ''}
+            userName={userName || ''}
           />
         </Toolbar>
       </AppBar>

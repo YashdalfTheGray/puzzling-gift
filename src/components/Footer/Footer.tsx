@@ -1,7 +1,5 @@
 import { Component } from 'preact';
 
-import Paper from '@mui/material/Paper';
-
 import './Footer.scss';
 
 export default class Footer extends Component {
