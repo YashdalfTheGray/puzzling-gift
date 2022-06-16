@@ -1,9 +1,9 @@
 // Import the functions you need from the SDKs you need
 import { FirebaseApp, getApp, initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
-import { getDatabase, ref, child, get } from 'firebase/database';
+import { getDatabase, ref, child, get, update } from 'firebase/database';
 
-import { NoPuzzlesFoundForUserError } from '~/src/errors';
+import { UUID, PuzzleSet } from '~/src/datastoreTypes';
 
 const {
   FIREBASE_API_KEY,
@@ -36,18 +36,76 @@ export function getAppAnalyticsInstance(app?: FirebaseApp) {
   return getAnalytics(app || getApp());
 }
 
-export async function getPuzzlesForUser(userId: string) {
-  try {
-    const app = getApp();
-    const dbRef = ref(getDatabase(app));
-    const snapshot = await get(child(dbRef, `users/${userId}`));
+export async function getPuzzleSetById(id: UUID) {
+  const app = getApp();
+  const dbRef = ref(getDatabase(app));
+  const snapshot = await get(child(dbRef, `puzzleSets/${id}`));
 
-    if (snapshot.exists()) {
-      return snapshot.val();
-    } else {
-      throw new NoPuzzlesFoundForUserError(userId);
+  if (snapshot.exists()) {
+    return snapshot.val() as PuzzleSet;
+  } else {
+    throw new Error(`Puzzleset with id ${id} not found`);
+  }
+}
+
+export async function getPuzzleById(id: UUID) {
+  const app = getApp();
+  const dbRef = ref(getDatabase(app));
+  const snapshot = await get(child(dbRef, `puzzles/${id}`));
+
+  if (snapshot.exists()) {
+    return snapshot.val();
+  } else {
+    throw new Error(`Puzzle with id ${id} not found`);
+  }
+}
+
+export async function getOnePuzzleClueForId(id: UUID, index: number) {
+  const app = getApp();
+  const dbRef = ref(getDatabase(app));
+  const snapshot = await get(child(dbRef, `puzzleClues/${id}/${index}`));
+
+  if (snapshot.exists()) {
+    return snapshot.val();
+  } else {
+    throw new Error(`Puzzle clue with id ${id} and index ${index} not found`);
+  }
+}
+
+export async function getOnePuzzleSolutionForId(id: UUID, index: number) {
+  const app = getApp();
+  const dbRef = ref(getDatabase(app));
+  const snapshot = await get(child(dbRef, `puzzleSolutions/${id}/${index}`));
+
+  if (snapshot.exists()) {
+    return snapshot.val();
+  } else {
+    throw new Error(
+      `Puzzle solution with id ${id} and index ${index} not found`
+    );
+  }
+}
+
+export async function putPuzzleClueSolvedForId(id: UUID, index: number) {
+  const app = getApp();
+  const dbRef = ref(getDatabase(app));
+  const snapshot = await get(child(dbRef, `puzzles/${id}/cluesSolved`));
+
+  if (snapshot.exists()) {
+    const oldCluesSolved = snapshot.val();
+    const newCluesSolved = oldCluesSolved + 1;
+
+    if (newCluesSolved !== index) {
+      throw new Error(
+        `Out of order clue posted for puzzle ${id}, expected ${newCluesSolved} but got ${index}`
+      );
     }
-  } catch (e) {
-    console.error(e);
+
+    const updates = {};
+    updates[`puzzles/${id}/cluesSolved`] = newCluesSolved;
+
+    return update(dbRef, updates);
+  } else {
+    throw new Error(`Puzzle with id ${id} not found`);
   }
 }
