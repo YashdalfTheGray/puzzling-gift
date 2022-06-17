@@ -20,9 +20,9 @@ export function createAction<T extends string, P>(type: T, payload?: P) {
   return { type, payload };
 }
 
-export interface IApiProcessingSlice {
+export interface IActionProcessingSlice {
   isProcessing: boolean;
-  apiError: Error;
+  actionError: Error;
 }
 
 export const createProcessingSlice = (
