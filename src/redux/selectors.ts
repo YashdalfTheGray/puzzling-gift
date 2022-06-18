@@ -1,5 +1,8 @@
 import { PuzzleStore } from './puzzleStore';
 
+export const isUserLoggedIn = (state: PuzzleStore) =>
+  state.currentUser !== null;
+export const getCurrentUser = (state: PuzzleStore) => state.currentUser;
 export const getPuzzleSetById = (state: PuzzleStore, id: string) =>
   state.puzzleSets[id];
 export const getPuzzleById = (state: PuzzleStore, id: string) =>

@@ -2,6 +2,19 @@ import { combineReducers } from 'redux';
 import * as puzzleActions from './actions';
 import { createProcessingSlice } from './utils';
 
+const currentUser = (state = null, action: puzzleActions.PuzzleActions) => {
+  switch (action.type) {
+    case puzzleActions.LOGIN_SUCCESS:
+      return action.payload;
+    case puzzleActions.LOGOUT_SUCCESS:
+    case puzzleActions.LOGIN_ERROR:
+    case puzzleActions.LOGOUT_ERROR:
+      return null;
+    default:
+      return state;
+  }
+};
+
 const puzzleSetsById = (state = {}, action: puzzleActions.PuzzleActions) => {
   switch (action.type) {
     case puzzleActions.GET_PUZZLESET_SUCCESS:
@@ -57,6 +70,18 @@ const puzzleSolutionsById = (
   }
 };
 
+const loginResultActionProcessing = createProcessingSlice(
+  puzzleActions.LOGIN_RESULT,
+  puzzleActions.LOGIN_SUCCESS,
+  puzzleActions.LOGIN_ERROR
+);
+
+const logoutActionProcessing = createProcessingSlice(
+  puzzleActions.LOGOUT,
+  puzzleActions.LOGOUT_SUCCESS,
+  puzzleActions.LOGOUT_ERROR
+);
+
 const getPuzzleSetActionProcessing = createProcessingSlice(
   puzzleActions.GET_PUZZLESET,
   puzzleActions.GET_PUZZLESET_SUCCESS,
@@ -88,10 +113,13 @@ const putPuzzleClueSolvedActionProcessing = createProcessingSlice(
 );
 
 export default combineReducers({
+  currentUser,
   puzzleSetsById,
   puzzlesById,
   puzzleCluesById,
   puzzleSolutionsById,
+  loginResultActionProcessing,
+  logoutActionProcessing,
   getPuzzleSetActionProcessing,
   getPuzzleActionProcessing,
   getPuzzleClueActionProcessing,

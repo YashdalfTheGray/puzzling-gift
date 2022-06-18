@@ -1,8 +1,11 @@
 import { UserCredential } from 'firebase/auth';
+
 import { Puzzle, PuzzleSet, UUID } from '~/src/datastoreTypes';
+
 import { ActionsMap, createAction } from './utils';
 
-export const LOGIN = '[auth] login';
+export const LOGIN_START = '[auth] login start';
+export const LOGIN_RESULT = '[auth] login result';
 export const LOGIN_SUCCESS = '[auth] login success';
 export const LOGIN_ERROR = '[auth] login error';
 
@@ -31,9 +34,14 @@ export const GET_PUZZLE_SOLUTION_SUCCESS = '[puzzle solution] get success';
 export const GET_PUZZLE_SOLUTION_ERROR = '[puzzle solution] get error';
 
 export const PuzzleActions = {
-  login: () => createAction(LOGIN),
+  loginStart: () => createAction(LOGIN_START),
+  loginResult: () => createAction(LOGIN_RESULT),
   loginSuccess: (user: UserCredential) => createAction(LOGIN_SUCCESS, user),
   loginError: (error: Error) => createAction(LOGIN_ERROR, error),
+
+  logout: () => createAction(LOGOUT),
+  logoutSuccess: () => createAction(LOGOUT_SUCCESS),
+  logoutError: (error: Error) => createAction(LOGOUT_ERROR, error),
 
   getPuzzleSet: (id: UUID) => createAction(GET_PUZZLESET, id),
   getPuzzleSetSuccess: (puzzleSet: PuzzleSet) =>

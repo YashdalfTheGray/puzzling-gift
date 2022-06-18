@@ -1,22 +1,54 @@
-import {
-  all,
-  call,
-  put,
-  take,
-  takeEvery,
-  takeLatest,
-} from 'redux-saga/effects';
+import { all, call, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import { UserCredential } from 'firebase/auth';
 
 import {
   getOnePuzzleClueForId,
   getPuzzleById,
   getPuzzleSetById,
   putPuzzleClueSolvedForId,
-} from '../firebase';
+} from '~/src/firebase';
+import { doAuthRedirect, getAuthResult, doSignOut } from '~/src/auth';
+import { Puzzle, PuzzleSet } from '~/src/datastoreTypes';
+
 import * as actions from './actions';
-import { Puzzle, PuzzleSet } from '../datastoreTypes';
 
 const PuzzleActions = actions.PuzzleActions;
+
+export function* loginStart(
+  _action: ReturnType<typeof PuzzleActions.loginStart>
+) {
+  try {
+    yield call(doAuthRedirect);
+  } catch (e) {
+    yield put(PuzzleActions.loginError(e));
+
+    throw e;
+  }
+}
+
+export function* loginResult(
+  _action: ReturnType<typeof PuzzleActions.loginResult>
+) {
+  try {
+    const user: UserCredential = yield call(getAuthResult) || null;
+    yield put(PuzzleActions.loginSuccess(user));
+  } catch (e) {
+    yield put(PuzzleActions.loginError(e));
+
+    throw e;
+  }
+}
+
+export function* logoutUser(_action: ReturnType<typeof PuzzleActions.logout>) {
+  try {
+    yield call(doSignOut);
+    yield put(PuzzleActions.logoutSuccess());
+  } catch (e) {
+    yield put(PuzzleActions.logoutError(e));
+
+    throw e;
+  }
+}
 
 export function* getPuzzleSetSaga(
   action: ReturnType<typeof PuzzleActions.getPuzzleSet>
@@ -109,6 +141,9 @@ export function* putPuzzleClueSolvedSaga(
 
 export default function* rootSaga() {
   yield all([
+    takeLatest(PuzzleActions.loginStart, loginStart),
+    takeLatest(PuzzleActions.loginResult, loginResult),
+    takeLatest(PuzzleActions.logout, logoutUser),
     takeEvery(PuzzleActions.getPuzzleSet, getPuzzleSetSaga),
     takeEvery(PuzzleActions.getPuzzle, getPuzzleSaga),
     takeEvery(PuzzleActions.getPuzzleClue, getPuzzleClueSaga),
