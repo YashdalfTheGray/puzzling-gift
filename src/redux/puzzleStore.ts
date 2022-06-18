@@ -1,3 +1,5 @@
+import { UserCredential } from 'firebase/auth';
+
 import {
   Puzzles,
   PuzzleSets,
@@ -8,7 +10,7 @@ import {
 import { IActionProcessingSlice } from './utils';
 
 export type PuzzleStore = {
-  currentUser: {} | null;
+  currentUser: UserCredential | null;
   puzzles: Puzzles;
   puzzleSets: PuzzleSets;
   puzzleClues: PuzzleClues;
