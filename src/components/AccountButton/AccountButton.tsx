@@ -1,6 +1,7 @@
 // Can't use preact because https://github.com/parcel-bundler/parcel/issues/7867
 // import { Component } from 'preact';
 import { Component, MouseEvent } from 'react';
+import { connect } from 'react-redux';
 
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
@@ -8,19 +9,32 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 
-import { doAuthRedirect } from '~/src/auth';
+import { PuzzleActions } from '~/src/redux/actions';
+import { PuzzleStore, ActionSliceNames } from '~/src/redux/puzzleStore';
+import * as puzzleSelectors from '~/src/redux/selectors';
 
-export type AccountButtonProps = {
-  isAuthenticated: boolean;
-  profilePictureUrl: string;
-  userName: string;
+const mapStateToProps = (state: PuzzleStore) => ({
+  currentUser: puzzleSelectors.getCurrentUser(state),
+  isUserLoggedIn: puzzleSelectors.isUserLoggedIn(state),
+  isProcessingLogin: puzzleSelectors.getIsProcessingByAction(
+    state,
+    ActionSliceNames.LoginResult
+  ),
+});
+
+const mapDispatchToProps = {
+  dispatchLoginStart: PuzzleActions.loginStart,
+  dispatchLogout: PuzzleActions.logout,
 };
+
+type AccountButtonProps = ReturnType<typeof mapStateToProps> &
+  typeof mapDispatchToProps;
 
 export type AccountButtonState = {
   menuAnchorElement: HTMLElement | null;
 };
 
-export default class AccountButton extends Component<
+export class AccountButton extends Component<
   AccountButtonProps,
   AccountButtonState
 > {
@@ -42,9 +56,9 @@ export default class AccountButton extends Component<
 
   render() {
     const { menuAnchorElement } = this.state;
-    const { isAuthenticated, profilePictureUrl, userName } = this.props;
+    const { dispatchLoginStart, dispatchLogout, currentUser } = this.props;
 
-    return isAuthenticated ? (
+    return !!currentUser ? (
       <div>
         <IconButton
           size="large"
@@ -53,7 +67,10 @@ export default class AccountButton extends Component<
           aria-haspopup="true"
           onClick={this.handleMenuOpen}
           color="inherit">
-          <Avatar alt={userName} src={profilePictureUrl} />
+          <Avatar
+            alt={currentUser.user.displayName!}
+            src={currentUser.user.photoURL!}
+          />
         </IconButton>
         <Menu
           id="menu-appbar"
@@ -69,7 +86,7 @@ export default class AccountButton extends Component<
           }}
           open={Boolean(menuAnchorElement)}
           onClose={this.handleMenuClose}>
-          <MenuItem onClick={this.handleMenuClose}>Logout</MenuItem>
+          <MenuItem onClick={dispatchLogout}>Logout</MenuItem>
         </Menu>
       </div>
     ) : (
@@ -78,10 +95,12 @@ export default class AccountButton extends Component<
         aria-label="account of current user"
         aria-controls="menu-appbar"
         aria-haspopup="true"
-        onClick={doAuthRedirect}
+        onClick={dispatchLoginStart}
         color="inherit">
         <AccountCircle />
       </IconButton>
     );
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(AccountButton);

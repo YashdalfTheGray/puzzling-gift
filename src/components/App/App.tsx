@@ -1,7 +1,6 @@
 // Can't use preact because https://github.com/parcel-bundler/parcel/issues/7867
 // import { Component } from 'preact';
 import { Component } from 'react';
-import { UserCredential } from 'firebase/auth';
 import { connect } from 'react-redux';
 
 import CssBaseline from '@mui/material/CssBaseline';
@@ -29,14 +28,10 @@ const mapDispatchToProps = {
   dispatchLoginResult: PuzzleActions.loginResult,
 };
 
-export type AppState = {
-  authResult: UserCredential | null | undefined;
-};
-
 export type AppProps = ReturnType<typeof mapStateToProps> &
   typeof mapDispatchToProps;
 
-export class App extends Component<AppProps, AppState> {
+export class App extends Component<AppProps> {
   constructor(props: AppProps) {
     super(props);
 
@@ -46,21 +41,18 @@ export class App extends Component<AppProps, AppState> {
   }
 
   async componentDidMount() {
-    const { dispatchLoginResult, isProcessingLogin } = this.props;
+    const { dispatchLoginResult } = this.props;
 
     dispatchLoginResult();
-    console.log('isProcessingLogin', isProcessingLogin);
   }
 
   render() {
-    const { authResult } = this.state;
-
     return (
       <ThemeProvider theme={theme}>
         <>
           <CssBaseline enableColorScheme={true} />
           <div className="app">
-            <Header authResult={authResult} />
+            <Header />
             <div>This is where the main content will go</div>
             <Footer />
           </div>
