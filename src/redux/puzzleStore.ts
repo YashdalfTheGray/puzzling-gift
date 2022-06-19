@@ -23,3 +23,13 @@ export type PuzzleStore = {
   putPuzzleClueSolvedActionProcessing: IActionProcessingSlice;
   getPuzzleSolutionActionProcessing: IActionProcessingSlice;
 };
+
+export enum ActionSliceNames {
+  LoginResult = 'loginResult',
+  Logout = 'logout',
+  GetPuzzleSet = 'getPuzzleSet',
+  GetPuzzle = 'getPuzzle',
+  GetPuzzleClue = 'getPuzzleClue',
+  PutPuzzleClueSolved = 'putPuzzleClueSolved',
+  GetPuzzleSolution = 'getPuzzleSolution',
+}

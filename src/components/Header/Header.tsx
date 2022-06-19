@@ -1,4 +1,6 @@
-import { Component } from 'preact';
+// Can't use preact because https://github.com/parcel-bundler/parcel/issues/7867
+// import { Component } from 'preact';
+import { Component } from 'react';
 
 import { UserCredential } from 'firebase/auth';
 

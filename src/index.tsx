@@ -1,4 +1,6 @@
-import { render } from 'preact';
+// Can't use preact because https://github.com/parcel-bundler/parcel/issues/7867
+// import { render } from 'preact';
+import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 import { initFirebaseApp } from '~/src/firebase';
@@ -14,4 +16,4 @@ const ProvidedApp = () => (
 );
 
 document.querySelector('div#app-root')!.innerHTML = '';
-render(<ProvidedApp />, document.querySelector('div#app-root')!);
+ReactDOM.render(<ProvidedApp />, document.querySelector('div#app-root')!);
