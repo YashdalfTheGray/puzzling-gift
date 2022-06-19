@@ -1,6 +1,12 @@
 {
   "extends": "@parcel/config-default",
   "validators": {
-    "*.{ts,tsx}": ["@parcel/validator-typescript"]
-  }
+    "*.{ts,tsx}": [
+      "@parcel/validator-typescript"
+    ]
+  },
+  "reporters": [
+    "...",
+    "@parcel/reporter-bundle-analyzer"
+  ]
 }
