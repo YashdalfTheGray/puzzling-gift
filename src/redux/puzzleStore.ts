@@ -25,11 +25,11 @@ export type PuzzleStore = {
 };
 
 export enum ActionSliceNames {
-  LoginResult = 'loginResult',
-  Logout = 'logout',
-  GetPuzzleSet = 'getPuzzleSet',
-  GetPuzzle = 'getPuzzle',
-  GetPuzzleClue = 'getPuzzleClue',
-  PutPuzzleClueSolved = 'putPuzzleClueSolved',
-  GetPuzzleSolution = 'getPuzzleSolution',
+  LoginResult = 'loginResultActionProcessing',
+  Logout = 'logoutActionProcessing',
+  GetPuzzleSet = 'getPuzzleSetActionProcessing',
+  GetPuzzle = 'getPuzzleActionProcessing',
+  GetPuzzleClue = 'getPuzzleClueActionProcessing',
+  PutPuzzleClueSolved = 'putPuzzleClueSolvedActionProcessing',
+  GetPuzzleSolution = 'getPuzzleSolutionActionProcessing',
 }

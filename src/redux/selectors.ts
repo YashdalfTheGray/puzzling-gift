@@ -1,4 +1,4 @@
-import { PuzzleStore } from './puzzleStore';
+import { PuzzleStore, ActionSliceNames } from './puzzleStore';
 
 export const isUserLoggedIn = (state: PuzzleStore) =>
   state.currentUser !== null;
@@ -17,7 +17,11 @@ export const getPuzzleSolutionByIdAndIndex = (
   id: string,
   index: number
 ) => state.puzzleSolutions[id][index];
-export const getActionErrorByAction = (state: PuzzleStore, api: string) =>
-  state[`${api}ActionProcessing`].ActionError as Error;
-export const getIsProcessingByAction = (state: PuzzleStore, api: string) =>
-  state[`${api}ActionProcessing`].isProcessing as boolean;
+export const getActionErrorByAction = (
+  state: PuzzleStore,
+  action: ActionSliceNames
+) => state[action].actionError as Error;
+export const getIsProcessingByAction = (
+  state: PuzzleStore,
+  action: ActionSliceNames
+) => state[action].isProcessing as boolean;

@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 
-import { getAuthResult } from '~/src/auth';
 import { theme } from '~/src/theme';
 import Header from '~/src/components/Header';
 import Footer from '~/src/components/Footer';
@@ -27,7 +26,7 @@ const mapStateToProps = (state: PuzzleStore) => ({
 });
 
 const mapDispatchToProps = {
-  getAuthResult: PuzzleActions.loginResult,
+  dispatchLoginResult: PuzzleActions.loginResult,
 };
 
 export type AppState = {
@@ -47,9 +46,10 @@ export class App extends Component<AppProps, AppState> {
   }
 
   async componentDidMount() {
-    const { getAuthResult } = this.props;
+    const { dispatchLoginResult, isProcessingLogin } = this.props;
 
-    getAuthResult();
+    dispatchLoginResult();
+    console.log('isProcessingLogin', isProcessingLogin);
   }
 
   render() {

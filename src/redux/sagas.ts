@@ -3,6 +3,7 @@ import { UserCredential } from 'firebase/auth';
 
 import {
   getOnePuzzleClueForId,
+  getOnePuzzleSolutionForId,
   getPuzzleById,
   getPuzzleSetById,
   putPuzzleClueSolvedForId,
@@ -104,7 +105,7 @@ export function* getPuzzleSolutionSaga(
 ) {
   try {
     const solution: string = yield call(
-      getOnePuzzleClueForId,
+      getOnePuzzleSolutionForId,
       action.payload.id,
       action.payload.solutionNumber
     );
@@ -143,13 +144,13 @@ export function* putPuzzleClueSolvedSaga(
 
 export default function* rootSaga() {
   yield all([
-    takeLatest(PuzzleActions.loginStart, loginStart),
-    takeLatest(PuzzleActions.loginResult, loginResult),
-    takeLatest(PuzzleActions.logout, logoutUser),
-    takeEvery(PuzzleActions.getPuzzleSet, getPuzzleSetSaga),
-    takeEvery(PuzzleActions.getPuzzle, getPuzzleSaga),
-    takeEvery(PuzzleActions.getPuzzleClue, getPuzzleClueSaga),
-    takeEvery(PuzzleActions.getPuzzleSolution, getPuzzleSolutionSaga),
-    takeLatest(PuzzleActions.putPuzzleClueSolved, putPuzzleClueSolvedSaga),
+    takeLatest(actions.LOGIN_START, loginStart),
+    takeLatest(actions.LOGIN_RESULT, loginResult),
+    takeLatest(actions.LOGOUT, logoutUser),
+    takeEvery(actions.GET_PUZZLESET, getPuzzleSetSaga),
+    takeEvery(actions.GET_PUZZLE, getPuzzleSaga),
+    takeEvery(actions.GET_PUZZLE_CLUE, getPuzzleClueSaga),
+    takeEvery(actions.GET_PUZZLE_SOLUTION, getPuzzleSolutionSaga),
+    takeLatest(actions.PUT_PUZZLE_CLUE_SOLVED, putPuzzleClueSolvedSaga),
   ]);
 }
