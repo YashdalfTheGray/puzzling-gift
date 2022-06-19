@@ -49,7 +49,7 @@ export class App extends Component<AppProps, AppState> {
   async componentDidMount() {
     const { getAuthResult } = this.props;
 
-    // getAuthResult();
+    getAuthResult();
   }
 
   render() {

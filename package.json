@@ -7,7 +7,9 @@
   "scripts": {
     "start": "parcel --dist-dir public",
     "build": "parcel build --dist-dir public",
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit",
+    "clean": "npx rimraf public/* dist/*",
+    "clean:all": "npx rimraf public/* dist/* parcel-cache parcel-bundle-reports"
   },
   "repository": {
     "type": "git",

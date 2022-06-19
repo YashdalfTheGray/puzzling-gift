@@ -1,6 +1,6 @@
 // Can't use preact because https://github.com/parcel-bundler/parcel/issues/7867
 // import { Component } from 'preact';
-import { Component } from 'react';
+import { Component, MouseEvent } from 'react';
 
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
@@ -32,7 +32,7 @@ export default class AccountButton extends Component<
     };
   }
 
-  public handleMenuOpen = (event: MouseEvent) => {
+  public handleMenuOpen = (event: MouseEvent<HTMLButtonElement>) => {
     this.setState({ menuAnchorElement: event.currentTarget as HTMLElement });
   };
 
