@@ -132,6 +132,8 @@ export function* putPuzzleClueSolvedSaga(
       action.payload.clueNumber
     );
     yield put(PuzzleActions.putPuzzleClueSolvedSuccess());
+    const puzzle: Puzzle = yield call(getPuzzleById, action.payload.id);
+    yield put(PuzzleActions.getPuzzleSuccess(puzzle));
   } catch (e) {
     yield put(PuzzleActions.putPuzzleClueSolvedError(e));
 
