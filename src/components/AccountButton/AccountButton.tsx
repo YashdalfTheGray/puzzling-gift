@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
+import LoadingButton from '@mui/lab/LoadingButton';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
@@ -56,50 +57,67 @@ export class AccountButton extends Component<
 
   render() {
     const { menuAnchorElement } = this.state;
-    const { dispatchLoginStart, dispatchLogout, currentUser } = this.props;
+    const {
+      dispatchLoginStart,
+      dispatchLogout,
+      currentUser,
+      isProcessingLogin,
+    } = this.props;
 
-    return !!currentUser ? (
-      <div>
+    if (!isProcessingLogin && !currentUser) {
+      return (
         <IconButton
           size="large"
           aria-label="account of current user"
           aria-controls="menu-appbar"
           aria-haspopup="true"
-          onClick={this.handleMenuOpen}
+          onClick={dispatchLoginStart}
           color="inherit">
-          <Avatar
-            alt={currentUser.user.displayName!}
-            src={currentUser.user.photoURL!}
-          />
+          <AccountCircle />
         </IconButton>
-        <Menu
-          id="menu-appbar"
-          anchorEl={menuAnchorElement}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          keepMounted
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          open={Boolean(menuAnchorElement)}
-          onClose={this.handleMenuClose}>
-          <MenuItem onClick={dispatchLogout}>Logout</MenuItem>
-        </Menu>
-      </div>
-    ) : (
-      <IconButton
-        size="large"
-        aria-label="account of current user"
-        aria-controls="menu-appbar"
-        aria-haspopup="true"
-        onClick={dispatchLoginStart}
-        color="inherit">
-        <AccountCircle />
-      </IconButton>
-    );
+      );
+    } else if (isProcessingLogin) {
+      return (
+        <LoadingButton
+          disabled={true}
+          loading={true}
+          sx={{ color: 'background.paper' }}
+        />
+      );
+    } else if (!isProcessingLogin && currentUser) {
+      return (
+        <div>
+          <IconButton
+            size="large"
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={this.handleMenuOpen}
+            color="inherit">
+            <Avatar
+              alt={currentUser.user.displayName!}
+              src={currentUser.user.photoURL!}
+            />
+          </IconButton>
+          <Menu
+            id="menu-appbar"
+            anchorEl={menuAnchorElement}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={Boolean(menuAnchorElement)}
+            onClose={this.handleMenuClose}>
+            <MenuItem onClick={dispatchLogout}>Logout</MenuItem>
+          </Menu>
+        </div>
+      );
+    }
   }
 }
 
