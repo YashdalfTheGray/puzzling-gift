@@ -3,7 +3,7 @@ import { FirebaseApp, getApp, initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { getDatabase, ref, child, get, update } from 'firebase/database';
 
-import { UUID, PuzzleSet } from '~/src/datastoreTypes';
+import { UUID, PuzzleSet, PuzzleClue } from '~/src/datastoreTypes';
 
 const {
   FIREBASE_API_KEY,
@@ -89,6 +89,19 @@ export async function getOnePuzzleClueForId(id: UUID, index: number) {
   }
 }
 
+export async function getBatchPuzzleClueForId(id: UUID, until: number) {
+  const app = getApp();
+  const dbRef = ref(getDatabase(app));
+  const snapshot = await get(child(dbRef, `puzzleClues/${id}`));
+
+  if (snapshot.exists()) {
+    const clues: PuzzleClue[] = snapshot.val();
+    return clues.slice(0, until + 1 < clues.length ? until + 1 : clues.length);
+  } else {
+    throw new Error(`Puzzle clue with id ${id} until index ${until} not found`);
+  }
+}
+
 export async function getOnePuzzleSolutionForId(id: UUID, index: number) {
   const app = getApp();
   const dbRef = ref(getDatabase(app));
@@ -99,6 +112,24 @@ export async function getOnePuzzleSolutionForId(id: UUID, index: number) {
   } else {
     throw new Error(
       `Puzzle solution with id ${id} and index ${index} not found`
+    );
+  }
+}
+
+export async function getBatchPuzzleSolutionForId(id: UUID, until: number) {
+  const app = getApp();
+  const dbRef = ref(getDatabase(app));
+  const snapshot = await get(child(dbRef, `puzzleSolutions/${id}`));
+
+  if (snapshot.exists()) {
+    const solutions: string[] = snapshot.val();
+    return solutions.slice(
+      0,
+      until < solutions.length ? until : solutions.length
+    );
+  } else {
+    throw new Error(
+      `Puzzle solution with id ${id} until index ${until} not found`
     );
   }
 }
