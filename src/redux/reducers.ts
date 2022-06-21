@@ -47,12 +47,22 @@ const puzzlesById = (state = {}, action: puzzleActions.PuzzleActions) => {
 
 const puzzleCluesById = (state = {}, action: puzzleActions.PuzzleActions) => {
   switch (action.type) {
+    case puzzleActions.GET_PUZZLE_SUCCESS:
+      return {
+        ...state,
+        [action.payload.id]: [],
+      };
     case puzzleActions.GET_PUZZLE_CLUE_SUCCESS:
-      const cluesToInsert = state[action.payload.id] || [];
+      const cluesToInsert = state[action.payload.id];
       cluesToInsert.push(action.payload.clue);
       return {
         ...state,
         [action.payload.id]: cluesToInsert,
+      };
+    case puzzleActions.GET_BATCH_PUZZLE_CLUE_SUCCESS:
+      return {
+        ...state,
+        [action.payload.id]: action.payload.clues,
       };
     case puzzleActions.LOGOUT_SUCCESS:
     case puzzleActions.LOGOUT_ERROR:
@@ -67,12 +77,22 @@ const puzzleSolutionsById = (
   action: puzzleActions.PuzzleActions
 ) => {
   switch (action.type) {
+    case puzzleActions.GET_PUZZLE_SUCCESS:
+      return {
+        ...state,
+        [action.payload.id]: [],
+      };
     case puzzleActions.GET_PUZZLE_SOLUTION_SUCCESS:
-      const solutionsToInsert = state[action.payload.id] || [];
+      const solutionsToInsert = state[action.payload.id];
       solutionsToInsert.push(action.payload.solution);
       return {
         ...state,
         [action.payload.id]: solutionsToInsert,
+      };
+    case puzzleActions.GET_BATCH_PUZZLE_SOLUTION_SUCCESS:
+      return {
+        ...state,
+        [action.payload.id]: action.payload.solutions,
       };
     case puzzleActions.LOGOUT_SUCCESS:
     case puzzleActions.LOGOUT_ERROR:

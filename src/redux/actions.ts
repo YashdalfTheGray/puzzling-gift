@@ -1,6 +1,6 @@
 import { UserCredential } from 'firebase/auth';
 
-import { Puzzle, PuzzleSet, UUID } from '~/src/datastoreTypes';
+import { Puzzle, PuzzleClue, PuzzleSet, UUID } from '~/src/datastoreTypes';
 
 import { ActionsMap, createAction } from './utils';
 
@@ -25,6 +25,10 @@ export const GET_PUZZLE_CLUE = '[puzzle clue] get';
 export const GET_PUZZLE_CLUE_SUCCESS = '[puzzle clue] get success';
 export const GET_PUZZLE_CLUE_ERROR = '[puzzle clue] get error';
 
+export const GET_BATCH_PUZZLE_CLUE = '[puzzle clue] get batch';
+export const GET_BATCH_PUZZLE_CLUE_SUCCESS = '[puzzle clue] get batch success';
+export const GET_BATCH_PUZZLE_CLUE_ERROR = '[puzzle clue] get batch error';
+
 export const PUT_PUZZLE_CLUE_SOLVED = '[puzzle] put solved';
 export const PUT_PUZZLE_CLUE_SOLVED_SUCCESS = '[puzzle] put solved success';
 export const PUT_PUZZLE_CLUE_SOLVED_ERROR = '[puzzle] put solved error';
@@ -32,6 +36,12 @@ export const PUT_PUZZLE_CLUE_SOLVED_ERROR = '[puzzle] put solved error';
 export const GET_PUZZLE_SOLUTION = '[puzzle solution] get';
 export const GET_PUZZLE_SOLUTION_SUCCESS = '[puzzle solution] get success';
 export const GET_PUZZLE_SOLUTION_ERROR = '[puzzle solution] get error';
+
+export const GET_BATCH_PUZZLE_SOLUTION = '[puzzle solution] get batch';
+export const GET_BATCH_PUZZLE_SOLUTION_SUCCESS =
+  '[puzzle solution] get batch success';
+export const GET_BATCH_PUZZLE_SOLUTION_ERROR =
+  '[puzzle solution] get batch error';
 
 export const PuzzleActions = {
   loginStart: () => createAction(LOGIN_START),
@@ -58,10 +68,20 @@ export const PuzzleActions = {
   getPuzzleClueSuccess: (payload: {
     id: UUID;
     clueNumber: number;
-    clue: string;
+    clue: PuzzleClue;
   }) => createAction(GET_PUZZLE_CLUE_SUCCESS, payload),
   getPuzzleClueError: (error: Error) =>
     createAction(GET_PUZZLE_CLUE_ERROR, error),
+
+  getBatchPuzzleClue: (payload: { id: UUID; until: number }) =>
+    createAction(GET_BATCH_PUZZLE_CLUE, payload),
+  getBatchPuzzleClueSuccess: (payload: {
+    id: UUID;
+    until: number;
+    clues: PuzzleClue[];
+  }) => createAction(GET_BATCH_PUZZLE_CLUE_SUCCESS, payload),
+  getBatchPuzzleClueError: (error: Error) =>
+    createAction(GET_BATCH_PUZZLE_CLUE_ERROR, error),
 
   putPuzzleClueSolved: (payload: { id: UUID; clueNumber: number }) =>
     createAction(PUT_PUZZLE_CLUE_SOLVED, payload),
@@ -79,6 +99,16 @@ export const PuzzleActions = {
   }) => createAction(GET_PUZZLE_SOLUTION_SUCCESS, payload),
   getPuzzleSolutionError: (error: Error) =>
     createAction(GET_PUZZLE_SOLUTION_ERROR, error),
+
+  getBatchPuzzleSolution: (payload: { id: UUID; until: number }) =>
+    createAction(GET_BATCH_PUZZLE_SOLUTION, payload),
+  getBatchPuzzleSolutionSuccess: (payload: {
+    id: UUID;
+    until: number;
+    solutions: string[];
+  }) => createAction(GET_BATCH_PUZZLE_SOLUTION_SUCCESS, payload),
+  getBatchPuzzleSolutionError: (error: Error) =>
+    createAction(GET_BATCH_PUZZLE_SOLUTION_ERROR, error),
 };
 
 export type PuzzleActions = ActionsMap<typeof PuzzleActions>;
