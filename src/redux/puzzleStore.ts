@@ -11,10 +11,10 @@ import { IActionProcessingSlice } from './utils';
 
 export type PuzzleStore = {
   currentUser: UserCredential | null;
-  puzzles: Puzzles;
-  puzzleSets: PuzzleSets;
-  puzzleClues: PuzzleClues;
-  puzzleSolutions: PuzzleSolutions;
+  puzzlesById: Puzzles;
+  puzzleSetsById: PuzzleSets;
+  puzzleCluesById: PuzzleClues;
+  puzzleSolutionsById: PuzzleSolutions;
   loginResultActionProcessing: IActionProcessingSlice;
   logoutActionProcessing: IActionProcessingSlice;
   getPuzzleSetActionProcessing: IActionProcessingSlice;

@@ -1,22 +1,27 @@
+import { UUID } from '~/src/datastoreTypes';
 import { PuzzleStore, ActionSliceNames } from './puzzleStore';
 
 export const isUserLoggedIn = (state: PuzzleStore) =>
   state.currentUser !== null;
 export const getCurrentUser = (state: PuzzleStore) => state.currentUser;
-export const getPuzzleSetById = (state: PuzzleStore, id: string) =>
-  state.puzzleSets[id];
-export const getPuzzleById = (state: PuzzleStore, id: string) =>
-  state.puzzles[id];
-export const getPuzzleClueByIdAndIndex = (
+export const getPuzzleSetById = (state: PuzzleStore, id: UUID) =>
+  state.puzzleSetsById[id];
+export const getPuzzleById = (state: PuzzleStore, id: UUID) =>
+  state.puzzlesById[id];
+export const getAllPuzzleCluesById = (state: PuzzleStore, id: UUID) =>
+  state.puzzleCluesById[id];
+export const getPuzzleCluesByIdAndIndex = (
   state: PuzzleStore,
-  id: string,
+  id: UUID,
   index: number
-) => state.puzzleClues[id][index];
+) => state.puzzleCluesById[id][index];
+export const getAllPuzzleSolutionsById = (state: PuzzleStore, id: UUID) =>
+  state.puzzleSolutionsById[id];
 export const getPuzzleSolutionByIdAndIndex = (
   state: PuzzleStore,
-  id: string,
+  id: UUID,
   index: number
-) => state.puzzleSolutions[id][index];
+) => state.puzzleSolutionsById[id][index];
 export const getActionErrorByAction = (
   state: PuzzleStore,
   action: ActionSliceNames
