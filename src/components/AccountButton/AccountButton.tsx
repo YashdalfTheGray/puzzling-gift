@@ -5,10 +5,11 @@ import { connect } from 'react-redux';
 
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
-import LoadingButton from '@mui/lab/LoadingButton';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import CircularProgress from '@mui/material/CircularProgress';
+import LoadingButton from '@mui/lab/LoadingButton';
 
 import { PuzzleActions } from '~/src/redux/actions';
 import { PuzzleStore, ActionSliceNames } from '~/src/redux/puzzleStore';
@@ -81,7 +82,13 @@ export class AccountButton extends Component<
         <LoadingButton
           disabled={true}
           loading={true}
-          sx={{ color: 'background.paper' }}
+          loadingIndicator={
+            <CircularProgress
+              sx={{ color: 'background.paper' }}
+              thickness={5}
+              size={16}
+            />
+          }
         />
       );
     } else if (!isProcessingLogin && currentUser) {
