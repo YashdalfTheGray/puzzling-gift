@@ -22,6 +22,9 @@ const puzzleSetsById = (state = {}, action: puzzleActions.PuzzleActions) => {
         ...state,
         [action.payload.id]: action.payload,
       };
+    case puzzleActions.LOGOUT_SUCCESS:
+    case puzzleActions.LOGOUT_ERROR:
+      return {};
     default:
       return state;
   }
@@ -34,6 +37,9 @@ const puzzlesById = (state = {}, action: puzzleActions.PuzzleActions) => {
         ...state,
         [action.payload.id]: action.payload,
       };
+    case puzzleActions.LOGOUT_SUCCESS:
+    case puzzleActions.LOGOUT_ERROR:
+      return {};
     default:
       return state;
   }
@@ -48,6 +54,9 @@ const puzzleCluesById = (state = {}, action: puzzleActions.PuzzleActions) => {
         ...state,
         [action.payload.id]: cluesToInsert,
       };
+    case puzzleActions.LOGOUT_SUCCESS:
+    case puzzleActions.LOGOUT_ERROR:
+      return {};
     default:
       return state;
   }
@@ -65,6 +74,9 @@ const puzzleSolutionsById = (
         ...state,
         [action.payload.id]: solutionsToInsert,
       };
+    case puzzleActions.LOGOUT_SUCCESS:
+    case puzzleActions.LOGOUT_ERROR:
+      return {};
     default:
       return state;
   }
