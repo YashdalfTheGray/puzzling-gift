@@ -16,8 +16,13 @@ export type PuzzleSet = {
   allowlistedUsers: string;
 };
 
+export type PuzzleClue = {
+  text: string;
+  answer: string;
+};
+
 export type PuzzleClues = {
-  [key: UUID]: string[];
+  [key: UUID]: PuzzleClue[];
 };
 
 export type PuzzleSolutions = {

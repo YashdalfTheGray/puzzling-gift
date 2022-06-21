@@ -28,6 +28,23 @@ export function initFirebaseApp() {
     };
 
     const app = initializeApp(firebaseConfig);
+
+    // type FirebaseDebugger = {
+    //   firebase: FirebaseApp;
+    //   getDatabase: typeof getDatabase;
+    //   ref: typeof ref;
+    //   child: typeof child;
+    //   get: typeof get;
+    //   update: typeof update;
+    // };
+    // (window as Window & typeof globalThis & FirebaseDebugger).firebase = app;
+    // (window as Window & typeof globalThis & FirebaseDebugger).getDatabase =
+    //   getDatabase;
+    // (window as Window & typeof globalThis & FirebaseDebugger).ref = ref;
+    // (window as Window & typeof globalThis & FirebaseDebugger).get = get;
+    // (window as Window & typeof globalThis & FirebaseDebugger).child = child;
+    // (window as Window & typeof globalThis & FirebaseDebugger).update = update;
+
     return app;
   }
 }

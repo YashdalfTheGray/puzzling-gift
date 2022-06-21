@@ -18,9 +18,9 @@ export async function getAuthResult() {
   try {
     const result = await getRedirectResult(auth);
 
-    console.group('Auth related information');
-    console.log(result);
-    console.groupEnd();
+    // console.group('Auth related information');
+    // console.log(result);
+    // console.groupEnd();
 
     return result;
   } catch (error) {
