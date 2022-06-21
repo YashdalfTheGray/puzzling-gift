@@ -7,6 +7,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 import { PuzzleStore, ActionSliceNames } from '~/src/redux/puzzleStore';
 import * as puzzleSelectors from '~/src/redux/selectors';
+import PuzzleDisplay from '~/src/components/PuzzleDisplay';
 
 import './MainContent.scss';
 
@@ -47,7 +48,7 @@ export class MainContent extends Component<MainContentProps> {
         </div>
       );
     } else if (!isProcessingLogin && !isProcessingLogout && isUserLoggedIn) {
-      return <div>Trying to fetch {puzzleId} from firebase.</div>;
+      return <PuzzleDisplay puzzleId={puzzleId} />;
     }
   }
 }
