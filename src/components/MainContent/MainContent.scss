@@ -1,7 +1,8 @@
 .MainContent {
   display: flex;
 
-  &.loading {
+  &.loading,
+  &.logged-out {
     justify-content: center;
     align-items: center;
   }

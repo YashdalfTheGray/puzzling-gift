@@ -1,6 +1,6 @@
 // Can't use preact because https://github.com/parcel-bundler/parcel/issues/7867
 // import { Component } from 'preact';
-import { Component, MouseEvent } from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 
 import CircularProgress from '@mui/material/CircularProgress';
@@ -22,11 +22,16 @@ const mapStateToProps = (state: PuzzleStore) => ({
   ),
 });
 
-export type MainContentProps = ReturnType<typeof mapStateToProps>;
+export interface IMainContentProps {
+  puzzleId: string;
+}
+
+export type MainContentProps = IMainContentProps &
+  ReturnType<typeof mapStateToProps>;
 
 export class MainContent extends Component<MainContentProps> {
   render() {
-    const { isUserLoggedIn, isProcessingLogin, isProcessingLogout } =
+    const { isUserLoggedIn, isProcessingLogin, isProcessingLogout, puzzleId } =
       this.props;
 
     if (isProcessingLogin || isProcessingLogout) {
@@ -36,9 +41,13 @@ export class MainContent extends Component<MainContentProps> {
         </div>
       );
     } else if (!isProcessingLogin && !isProcessingLogout && !isUserLoggedIn) {
-      return <div>This is where the logged out content will go</div>;
+      return (
+        <div className="MainContent logged-out">
+          To access the puzzle, use the login button above.
+        </div>
+      );
     } else if (!isProcessingLogin && !isProcessingLogout && isUserLoggedIn) {
-      return <div>This is where the logged in content will go</div>;
+      return <div>Trying to fetch {puzzleId} from firebase.</div>;
     }
   }
 }

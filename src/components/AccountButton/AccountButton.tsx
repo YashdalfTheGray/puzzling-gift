@@ -7,9 +7,9 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import AccountCircle from '@mui/icons-material/AccountCircle';
 import CircularProgress from '@mui/material/CircularProgress';
 import LoadingButton from '@mui/lab/LoadingButton';
+import LoginIcon from '@mui/icons-material/Login';
 
 import { PuzzleActions } from '~/src/redux/actions';
 import { PuzzleStore, ActionSliceNames } from '~/src/redux/puzzleStore';
@@ -74,7 +74,7 @@ export class AccountButton extends Component<
           aria-haspopup="true"
           onClick={dispatchLoginStart}
           color="inherit">
-          <AccountCircle />
+          <LoginIcon />
         </IconButton>
       );
     } else if (isProcessingLogin) {
