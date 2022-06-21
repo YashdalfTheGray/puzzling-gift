@@ -1,0 +1,8 @@
+.MainContent {
+  display: flex;
+
+  &.loading {
+    justify-content: center;
+    align-items: center;
+  }
+}

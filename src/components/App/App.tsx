@@ -9,6 +9,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '~/src/theme';
 import Header from '~/src/components/Header';
 import Footer from '~/src/components/Footer';
+import MainContent from '~/src/components/MainContent';
 import { PuzzleStore, ActionSliceNames } from '~/src/redux/puzzleStore';
 import * as puzzleSelectors from '~/src/redux/Selectors';
 import { PuzzleActions } from '~/src/redux/actions';
@@ -53,7 +54,7 @@ export class App extends Component<AppProps> {
           <CssBaseline enableColorScheme={true} />
           <div className="app">
             <Header />
-            <div>This is where the main content will go</div>
+            <MainContent />
             <Footer />
           </div>
         </>
