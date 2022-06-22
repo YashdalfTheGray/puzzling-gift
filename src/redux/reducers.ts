@@ -50,7 +50,7 @@ const puzzleCluesById = (state = {}, action: puzzleActions.PuzzleActions) => {
     case puzzleActions.GET_PUZZLE_SUCCESS:
       return {
         ...state,
-        [action.payload.id]: [],
+        [action.payload.id]: state[action.payload.id] || [],
       };
     case puzzleActions.GET_PUZZLE_CLUE_SUCCESS:
       const cluesToInsert = state[action.payload.id];
@@ -80,7 +80,7 @@ const puzzleSolutionsById = (
     case puzzleActions.GET_PUZZLE_SUCCESS:
       return {
         ...state,
-        [action.payload.id]: [],
+        [action.payload.id]: state[action.payload.id] || [],
       };
     case puzzleActions.GET_PUZZLE_SOLUTION_SUCCESS:
       const solutionsToInsert = state[action.payload.id];

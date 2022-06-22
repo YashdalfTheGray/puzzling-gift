@@ -174,17 +174,21 @@ export function* getBatchPuzzleSolutionSaga(
 export function* putPuzzleClueSolvedSaga(
   action: ReturnType<typeof PuzzleActions.putPuzzleClueSolved>
 ) {
+  const { id, clueNumber } = action.payload;
+
   try {
-    yield call(
-      putPuzzleClueSolvedForId,
-      action.payload.id,
-      action.payload.clueNumber
-    );
+    yield call(putPuzzleClueSolvedForId, id, clueNumber);
     yield put(PuzzleActions.putPuzzleClueSolvedSuccess());
 
-    yield put(PuzzleActions.getPuzzle(action.payload.id));
-    const puzzle: Puzzle = yield call(getPuzzleById, action.payload.id);
-    yield put(PuzzleActions.getPuzzleSuccess(puzzle));
+    yield put(PuzzleActions.getPuzzle(id));
+    if (clueNumber < 10) {
+      // TODO 2022/06/22 @YashdalfTheGray
+      // figure out a better way to handle this case
+      yield put(PuzzleActions.getPuzzleClue({ id, clueNumber }));
+    }
+    yield put(
+      PuzzleActions.getPuzzleSolution({ id, solutionNumber: clueNumber - 1 })
+    );
   } catch (e) {
     yield put(PuzzleActions.putPuzzleClueSolvedError(e));
 
