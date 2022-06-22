@@ -1,6 +1,6 @@
 // Can't use preact because https://github.com/parcel-bundler/parcel/issues/7867
 // import { Component } from 'preact';
-import { Component } from 'react';
+import { Component, StrictMode } from 'react';
 import { connect } from 'react-redux';
 
 import CssBaseline from '@mui/material/CssBaseline';
@@ -67,14 +67,14 @@ export class App extends Component<AppProps, AppState> {
 
     return (
       <ThemeProvider theme={theme}>
-        <>
+        <StrictMode>
           <CssBaseline enableColorScheme={true} />
           <div className="app">
             <Header />
             <MainContent puzzleId={puzzleId} />
             <Footer />
           </div>
-        </>
+        </StrictMode>
       </ThemeProvider>
     );
   }
