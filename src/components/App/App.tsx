@@ -12,7 +12,7 @@ import Header from '~/src/components/Header';
 import Footer from '~/src/components/Footer';
 import MainContent from '~/src/components/MainContent';
 import { PuzzleStore, ActionSliceNames } from '~/src/redux/puzzleStore';
-import * as puzzleSelectors from '~/src/redux/Selectors';
+import * as puzzleSelectors from '~/src/redux/selectors';
 import { PuzzleActions } from '~/src/redux/actions';
 
 import './App.scss';
