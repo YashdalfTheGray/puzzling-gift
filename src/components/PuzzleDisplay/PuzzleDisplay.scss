@@ -1,0 +1,15 @@
+.PuzzleDisplay {
+  display: flex;
+
+  &.loading,
+  &.not-found {
+    justify-content: center;
+    align-items: center;
+  }
+
+  &.puzzle-found {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+}
