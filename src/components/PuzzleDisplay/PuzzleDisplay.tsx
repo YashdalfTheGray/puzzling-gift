@@ -160,15 +160,6 @@ export class PuzzleDisplay extends Component<PuzzleDisplayProps> {
       );
     }
   }
-
-  private fillWithBlanks(solutions: string[], desiredLength: number) {
-    const result = [...solutions];
-    while (result.length < desiredLength) {
-      result.push('_');
-    }
-
-    return result;
-  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PuzzleDisplay);
