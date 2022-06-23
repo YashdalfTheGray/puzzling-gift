@@ -2,6 +2,7 @@
 import { FirebaseApp, getApp, initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { getDatabase, ref, child, get, update } from 'firebase/database';
+import { initializeAppCheck, ReCaptchaV3Provider } from 'firebase/app-check';
 
 import { UUID, PuzzleSet, PuzzleClue } from '~/src/datastoreTypes';
 
@@ -11,6 +12,7 @@ const {
   FIREBASE_MESSAGING_SENDER_ID,
   FIREBASE_APP_ID,
   FIREBASE_MEASUREMENT_ID,
+  FIREBASE_APPCHECK_KEY,
 } = process.env;
 
 export function initFirebaseApp() {
@@ -28,6 +30,11 @@ export function initFirebaseApp() {
     };
 
     const app = initializeApp(firebaseConfig);
+
+    const appCheck = initializeAppCheck(app, {
+      provider: new ReCaptchaV3Provider(FIREBASE_APPCHECK_KEY!),
+      isTokenAutoRefreshEnabled: true,
+    });
 
     // type FirebaseDebugger = {
     //   firebase: FirebaseApp;
