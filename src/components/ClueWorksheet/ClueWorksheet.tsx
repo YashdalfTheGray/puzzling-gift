@@ -53,17 +53,16 @@ export default class ClueWorksheet extends Component<
   handleSubmit = () => {
     const { clue, onSuccessfulGuess } = this.props;
     const { currentGuess } = this.state;
+    const processedAnswer = clue.answer.toLowerCase().trim();
+    const processedGuess = currentGuess.toLowerCase().trim();
 
-    if (
-      clue.answer.toLowerCase() === currentGuess.toLowerCase() &&
-      onSuccessfulGuess
-    ) {
+    if (processedAnswer === processedGuess && onSuccessfulGuess) {
       this.setState({
         currentGuess: '',
         tryAgainMessage: '',
       });
       onSuccessfulGuess();
-    } else if (clue.answer.toLowerCase() !== currentGuess.toLowerCase()) {
+    } else if (processedAnswer !== processedGuess) {
       this.setState({
         currentGuess: '',
         tryAgainMessage: 'not quite right',
