@@ -1,6 +1,7 @@
 // Can't use preact because https://github.com/parcel-bundler/parcel/issues/7867
 // import { Component } from 'preact';
 import { Component, ChangeEvent, KeyboardEvent } from 'react';
+import { logEvent } from 'firebase/analytics';
 
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -10,6 +11,8 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 
 import { PuzzleClue } from '~/src/datastoreTypes';
+import Events from '~/src/events';
+import { getAppAnalyticsInstance } from '~/src/firebase';
 
 import './ClueWorksheet.scss';
 
@@ -61,8 +64,14 @@ export default class ClueWorksheet extends Component<
         currentGuess: '',
         tryAgainMessage: '',
       });
+      logEvent(getAppAnalyticsInstance(), Events.PuzzleClueGuessHit, {
+        guess: processedGuess,
+      });
       onSuccessfulGuess();
     } else if (processedAnswer !== processedGuess) {
+      logEvent(getAppAnalyticsInstance(), Events.PuzzleClueGuessMiss, {
+        guess: processedGuess,
+      });
       this.setState({
         currentGuess: '',
         tryAgainMessage: 'not quite right',
