@@ -3,6 +3,9 @@
 import { Component } from 'react';
 
 import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
 import './SolutionReadout.scss';
 
@@ -19,13 +22,24 @@ export default class SolutionReadout extends Component<SolutionReadoutProps> {
     }
 
     return (
-      <div className="SolutionReadout">
-        {this.fillWithBlanks(solutions, 10).map((s, i) => (
-          <Paper className="single-solution" key={i} elevation={1}>
-            {s}
-          </Paper>
-        ))}
-      </div>
+      <Paper
+        className="SolutionReadout"
+        sx={{ backgroundColor: 'background.default' }}>
+        <Typography>Puzzle Solution</Typography>
+        <span className="solution-row">
+          <span>
+            <ArrowRightIcon />
+          </span>
+          {this.fillWithBlanks(solutions, 10).map((s, i) => (
+            <Paper className="single-solution" key={i} elevation={1}>
+              {s}
+            </Paper>
+          ))}
+          <span>
+            <ArrowLeftIcon />
+          </span>
+        </span>
+      </Paper>
     );
   }
 

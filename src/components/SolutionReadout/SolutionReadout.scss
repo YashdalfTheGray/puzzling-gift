@@ -1,12 +1,21 @@
 .SolutionReadout {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 8px;
   margin-top: 8px;
+  padding: 16px;
 
-  .single-solution {
-    padding: 10px;
+  .solution-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+    .single-solution {
+      padding: 10px;
+    }
   }
 }
