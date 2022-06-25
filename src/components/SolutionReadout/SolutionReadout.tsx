@@ -25,19 +25,15 @@ export default class SolutionReadout extends Component<SolutionReadoutProps> {
       <Paper
         className="SolutionReadout"
         sx={{ backgroundColor: 'background.default' }}>
-        <Typography>Puzzle Solution</Typography>
+        <Typography variant="h5">Puzzle Solution</Typography>
         <span className="solution-row">
-          <span>
-            <ArrowRightIcon />
-          </span>
+          <ArrowRightIcon className="bookend-arrows" />
           {this.fillWithBlanks(solutions, 10).map((s, i) => (
             <Paper className="single-solution" key={i} elevation={1}>
               {s}
             </Paper>
           ))}
-          <span>
-            <ArrowLeftIcon />
-          </span>
+          <ArrowLeftIcon className="bookend-arrows" />
         </span>
       </Paper>
     );
