@@ -17,6 +17,8 @@ These will authenticate with firebase as well as set up your project. Once you h
 
 ## Structure
 
+This application has a fairly standard react/redux structure to it. Each major component lives under `src/components` and all of the redux machinery lives under `redux`. Additionally, this project uses `redux-sagas` and `react-redux` to handle the side effects and connect components and reducer state.
+
 ## Resources
 
 - https://devjunhong.github.io/rust/backend_rust_rocket_react/
