@@ -1,0 +1,14 @@
+.ErrorBoundary {
+  display: grid;
+  grid-auto-flow: row;
+  grid-template-rows: auto 1fr auto;
+  align-content: space-between;
+  height: 100vh;
+  box-sizing: border-box;
+
+  .error-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

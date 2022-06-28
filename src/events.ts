@@ -29,6 +29,7 @@ enum Events {
   GetBatchPuzzleSolutionError = 'event_puzzle_solution_get_batch_error',
   PuzzleClueGuessMiss = 'event_puzzle_clue_guess_miss',
   PuzzleClueGuessHit = 'event_puzzle_clue_guess_hit',
+  ErrorBoundaryCaughtError = 'event_error_boundary_caught_error',
 }
 
 export default Events;

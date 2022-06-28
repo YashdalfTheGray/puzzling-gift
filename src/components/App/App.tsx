@@ -16,6 +16,7 @@ import * as puzzleSelectors from '~/src/redux/selectors';
 import { PuzzleActions } from '~/src/redux/actions';
 
 import './App.scss';
+import ErrorBoundary from '~/src/components/ErrorBoundary';
 
 const mapStateToProps = (state: PuzzleStore) => ({
   currentUser: puzzleSelectors.getCurrentUser(state),
@@ -69,11 +70,13 @@ export class App extends Component<AppProps, AppState> {
       <ThemeProvider theme={theme}>
         <StrictMode>
           <CssBaseline enableColorScheme={true} />
-          <div className="app">
-            <Header renderAccountButton={!!puzzleId} />
-            <MainContent puzzleId={puzzleId} />
-            <Footer />
-          </div>
+          <ErrorBoundary>
+            <div className="app">
+              <Header renderAccountButton={!!puzzleId} />
+              <MainContent puzzleId={puzzleId} />
+              <Footer />
+            </div>
+          </ErrorBoundary>
         </StrictMode>
       </ThemeProvider>
     );
