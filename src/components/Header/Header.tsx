@@ -8,15 +8,21 @@ import Typography from '@mui/material/Typography';
 
 import AccountButton from '~/src/components/AccountButton';
 
-export default class Header extends Component {
+export type HeaderProps = {
+  renderAccountButton: boolean;
+};
+
+export default class Header extends Component<HeaderProps> {
   render() {
+    const { renderAccountButton } = this.props;
+
     return (
       <AppBar position="static" enableColorOnDark={true} color="primary">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Puzzle Tracker
           </Typography>
-          <AccountButton />
+          {renderAccountButton ? <AccountButton /> : null}
         </Toolbar>
       </AppBar>
     );

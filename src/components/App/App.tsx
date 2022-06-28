@@ -70,7 +70,7 @@ export class App extends Component<AppProps, AppState> {
         <StrictMode>
           <CssBaseline enableColorScheme={true} />
           <div className="app">
-            <Header />
+            <Header renderAccountButton={!!puzzleId} />
             <MainContent puzzleId={puzzleId} />
             <Footer />
           </div>
