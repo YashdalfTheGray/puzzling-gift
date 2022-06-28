@@ -41,13 +41,29 @@ export class MainContent extends Component<MainContentProps> {
           <CircularProgress sx={{ color: 'primary' }} thickness={5} />
         </div>
       );
-    } else if (!isProcessingLogin && !isProcessingLogout && !isUserLoggedIn) {
+    } else if (!isProcessingLogin && !isProcessingLogout && !puzzleId) {
+      return (
+        <div className="MainContent no-puzzle">
+          You need a puzzle to get started.
+        </div>
+      );
+    } else if (
+      !isProcessingLogin &&
+      !isProcessingLogout &&
+      !isUserLoggedIn &&
+      puzzleId
+    ) {
       return (
         <div className="MainContent logged-out">
           To access the puzzle, use the login button above.
         </div>
       );
-    } else if (!isProcessingLogin && !isProcessingLogout && isUserLoggedIn) {
+    } else if (
+      !isProcessingLogin &&
+      !isProcessingLogout &&
+      isUserLoggedIn &&
+      puzzleId
+    ) {
       return <PuzzleDisplay puzzleId={puzzleId} />;
     }
   }

@@ -2,7 +2,8 @@
   display: flex;
 
   &.loading,
-  &.logged-out {
+  &.logged-out,
+  &.no-puzzle {
     justify-content: center;
     align-items: center;
   }
