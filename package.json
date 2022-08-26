@@ -36,7 +36,7 @@
     "@mui/icons-material": "^5.8.3",
     "@mui/lab": "^5.0.0-alpha.86",
     "@mui/material": "^5.9.1",
-    "@redux-devtools/extension": "^3.2.2",
+    "@redux-devtools/extension": "^3.2.3",
     "@swc/helpers": "^0.4.7",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.5",
