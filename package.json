@@ -23,7 +23,7 @@
   "homepage": "https://github.com/YashdalfTheGray/puzzling-gift#readme",
   "devDependencies": {
     "@parcel/reporter-bundle-analyzer": "^2.8.0",
-    "@parcel/transformer-sass": "^2.6.2",
+    "@parcel/transformer-sass": "^2.8.3",
     "@parcel/validator-typescript": "^2.6.0",
     "@types/node": "^18.11.18",
     "parcel": "^2.8.1",
