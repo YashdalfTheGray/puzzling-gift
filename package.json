@@ -33,7 +33,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.5",
-    "@mui/icons-material": "^5.10.9",
+    "@mui/icons-material": "^5.11.9",
     "@mui/lab": "^5.0.0-alpha.120",
     "@mui/material": "^5.11.8",
     "@redux-devtools/extension": "^3.2.5",
