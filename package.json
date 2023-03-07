@@ -39,7 +39,7 @@
     "@redux-devtools/extension": "^3.2.5",
     "@swc/helpers": "^0.4.11",
     "@types/react": "^18.0.27",
-    "@types/react-dom": "^18.0.10",
+    "@types/react-dom": "^18.0.11",
     "firebase": "^9.16.0",
     "preact": "^10.13.0",
     "react": "^18.2.0",
