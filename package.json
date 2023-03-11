@@ -38,7 +38,7 @@
     "@mui/material": "^5.11.8",
     "@redux-devtools/extension": "^3.2.5",
     "@swc/helpers": "^0.4.11",
-    "@types/react": "^18.0.27",
+    "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "firebase": "^9.16.0",
     "preact": "^10.13.0",
