@@ -35,7 +35,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.11",
     "@mui/lab": "^5.0.0-alpha.152",
-    "@mui/material": "^5.14.20",
+    "@mui/material": "^5.15.0",
     "@redux-devtools/extension": "^3.3.0",
     "@swc/helpers": "^0.5.3",
     "@types/react": "^18.2.37",
