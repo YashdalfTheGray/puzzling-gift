@@ -41,7 +41,7 @@
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.17",
     "firebase": "^10.5.2",
-    "preact": "^10.18.2",
+    "preact": "^10.19.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.3",
