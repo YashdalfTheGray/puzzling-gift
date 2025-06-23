@@ -28,7 +28,7 @@
     "@types/node": "^22.10.2",
     "parcel": "^2.15.2",
     "process": "^0.11.10",
-    "typescript": "^5.7.3"
+    "typescript": "^5.8.3"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
