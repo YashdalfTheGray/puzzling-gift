@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^7.1.0",
     "@mui/lab": "^6.0.0-dev.240424162023-9968b4889d",
     "@mui/material": "^7.3.1",
