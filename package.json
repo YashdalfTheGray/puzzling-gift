@@ -37,7 +37,7 @@
     "@mui/lab": "^7.0.0-beta.17",
     "@mui/material": "^7.3.9",
     "@redux-devtools/extension": "^3.3.0",
-    "@swc/helpers": "^0.5.15",
+    "@swc/helpers": "^0.5.23",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "firebase": "^12.12.0",
